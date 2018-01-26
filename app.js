@@ -23,11 +23,12 @@ geocode.geocodeAddress(argv.address,(errorMessage,results) => {
         console.log(errorMessage);
     } else {
         var finalResults = results;
-        weather.getWeather(results.latitude,results.longitude,(error,temperature) => {
+        weather.getWeather(results.latitude,results.longitude,(error,weatherResult) => {
             if (error) {
                 console.log(error);
             } else {
-                finalResults.temperature = temperature;
+                finalResults.temperature = weatherResult.temperature;
+                finalResults.apparentTemperature = weatherResult.apparentTemperature;
                 console.log(JSON.stringify(finalResults,undefined, 2));
             }
         })
